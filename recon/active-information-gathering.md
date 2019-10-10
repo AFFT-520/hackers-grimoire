@@ -67,8 +67,13 @@ Aggressive scan:
 ```text
 nmap -A [host]
 ```
+TCP Kitchen sink, with all the speed an subtlety of a fire truck repurposed as a battering ram:
 
-**Warning:** Big, nasty scans are great for labs, but sometimes get rate-limited. In real life settings, it's even worse. Start with light scans and do targeted scans when you discover something interesting.
+```text
+nmap -sSV -p0- -A -T5 [host]
+```
+
+**Warning:** Big, nasty scans, such as the last example, are great for labs, but sometimes get rate-limited. In real life settings, it's even worse. Start with light scans and do targeted scans when you discover something interesting.
 
 ### Nmap scripting engine \(NSE\)
 
