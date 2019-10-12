@@ -253,6 +253,21 @@ SMB uses these ports, which can be discovered using Nmap scans:
 * netbios-ssn 139/udp
 * microsoft-ds 445/tcp - Active Directory
 
+### Samba
+
+Samba is the SMB implementation of choice for non-Microsoft systems. Since Samba may not necessarily be tied to an OS version, it can be trickier to nail down what OS is running underneath it.
+
+Getting the version number can be tricky as well. In cases where automated tools might not do it, here is a shell script that can help you get this info:
+
+```bash
+if [ -z $1 ]; then echo "Usage: ./smbver.sh RHOST {RPORT}" && exit; else rhost=$1; fi
+if [ ! -z $2 ]; then rport=$2; else rport=139; fi
+tcpdump -s0 -n -i tap0 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i "samba\|s.a.m" | tr -d '.' | grep -oP 'UnixSamba.*[0-9a-z]' | tr -d '\n' & echo -n "$rhost: " &
+echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
+sleep 0.5 && echo ""
+```
+Usage: ./smbver.sh RHOST {RPORT}
+
 ### SMBclient
 
 Linux/Unix machines can browse and mount SMB shares, and transfer files.
