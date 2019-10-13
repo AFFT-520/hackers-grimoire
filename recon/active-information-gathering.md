@@ -260,11 +260,14 @@ Samba is the SMB implementation of choice for non-Microsoft systems. Since Samba
 Getting the version number can be tricky as well. In cases where automated tools might not do it, here is a shell script that can help you get this info:
 
 ```bash
-if [ -z $1 ]; then echo "Usage: ./smbver.sh RHOST IFACE {RPORT}" && exit; else rhost=$1; fi
-if [ ! -z $3 ]; then rport=$3; else rport=139; fi
-tcpdump -s0 -n -i $2 src $rhost and port $rport -A -c 7 2>/dev/null | grep -i "samba\|s.a.m" | tr -d '.' | grep -oP 'UnixSamba.*[0-9a-z]' | tr -d '\n' & echo -n "$rhost: " &
-echo "exit" | smbclient -L $rhost 1>/dev/null 2>/dev/null
-sleep 0.5 && echo ""
+Terminal 1
+--------------------------
+sudo tcpdump -s0 -n -i <interface> src <remote host> and port <remote port> -A -c 7
+
+--------------------------
+Terminal 2
+--------------------------
+smbclient -L //<remote host> 
 ```
 Usage: ./smbver.sh RHOST IFACE {RPORT}
 
