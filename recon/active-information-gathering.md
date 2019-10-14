@@ -587,6 +587,15 @@ Enumerate users:
 ```text
 wpscan --url [http://host] --enumerate u
 ```
+## AutoRecon
+
+AutoRecon is a powerful enumeration script that automates a lot of the tasks seen here. It isn't foolproof though; It is always worth checking to see what commands *didn't* work as well as the results of what did. To use:
+
+```bash
+git clone https://github.com/Tib3rius/AutoRecon
+cd AutoRecon
+python ./autorecon.py $IP
+```
 
 ## Further reading
 
