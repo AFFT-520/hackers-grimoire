@@ -594,7 +594,7 @@ AutoRecon is a powerful enumeration script that automates a lot of the tasks see
 ```bash
 git clone https://github.com/Tib3rius/AutoRecon
 cd AutoRecon
-python ./autorecon.py $IP
+python3 ./autorecon.py $IP
 ```
 
 ## Further reading
